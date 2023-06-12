@@ -15,7 +15,6 @@ interface PostProps {
 }
 
 export default function Post({ children, owner }: PostProps) {
-  console.log(owner);
   return (
     <Card>
       <CardHeader className='flex-row items-center gap-2'>
