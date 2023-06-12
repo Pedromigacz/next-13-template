@@ -1,13 +1,30 @@
 import { ReactNode } from 'react';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/app/components/sharedComponents/card';
+import { User } from '@prisma/client';
+import { Avatar, AvatarFallback, AvatarImage } from './sharedComponents/avatar';
 
 interface PostProps {
   children: string | ReactNode;
+  owner: User;
 }
 
-export default function Post({ children }: PostProps) {
+export default function Post({ children, owner }: PostProps) {
   return (
-    <li className='rounded-lg border bg-card text-card-foreground shadow-sm w-full pt-4 pb-6 px-6 break-words'>
-      {children}
-    </li>
+    <Card>
+      <CardHeader className='flex-row items-center gap-2'>
+        <Avatar>
+          <AvatarImage src='https://github.com/shadcn.png' />
+          <AvatarFallback>CN</AvatarFallback>
+        </Avatar>
+        <CardTitle className='!mt-0'>{owner.name} disse:</CardTitle>
+      </CardHeader>
+      <CardContent className='break-words'>{children}</CardContent>
+    </Card>
   );
 }

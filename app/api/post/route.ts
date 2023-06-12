@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server';
 import prisma from '../../../prisma/client';
 
+import { getServerSession } from 'next-auth/next';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+
 export async function POST(req: Request) {
   // verificar se o usuário está logado
 
@@ -22,10 +25,31 @@ export async function POST(req: Request) {
     );
 
   try {
+    const session = await getServerSession(authOptions);
+
+    if (!session)
+      return NextResponse.json(
+        { error: 'You need to be logged in to do that' },
+        { status: 403 }
+      );
+
+    const currentUser = await prisma.user.findUnique({
+      where: {
+        email: String(session.user?.email),
+      },
+    });
+
+    if (!currentUser)
+      return NextResponse.json(
+        { error: 'You need to be logged in to do that' },
+        { status: 403 }
+      );
+
     // salvar o post na base de dados
     const newPost = await prisma.post.create({
       data: {
         title: title,
+        userId: currentUser.id,
       },
     });
 

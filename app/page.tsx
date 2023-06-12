@@ -9,6 +9,9 @@ export default async function Home() {
     orderBy: {
       createdAt: 'desc',
     },
+    include: {
+      user: true,
+    },
   });
 
   return (
@@ -18,7 +21,9 @@ export default async function Home() {
       <ul className='flex flex-col gap-2'>
         {posts &&
           posts.map((post) => (
-            <Post key={`post_${post.id}`}>{post.title}</Post>
+            <Post key={`post_${post.id}`} owner={post.user}>
+              {post.title}
+            </Post>
           ))}
       </ul>
     </main>
