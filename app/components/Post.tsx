@@ -15,12 +15,15 @@ interface PostProps {
 }
 
 export default function Post({ children, owner }: PostProps) {
+  console.log(owner);
   return (
     <Card>
       <CardHeader className='flex-row items-center gap-2'>
         <Avatar>
-          <AvatarImage src='https://github.com/shadcn.png' />
-          <AvatarFallback>CN</AvatarFallback>
+          <AvatarImage src={String(owner.image)} />
+          <AvatarFallback>
+            {String(owner.name)[0] + String(owner.name)[1]}
+          </AvatarFallback>
         </Avatar>
         <CardTitle className='!mt-0'>{owner.name} disse:</CardTitle>
       </CardHeader>
