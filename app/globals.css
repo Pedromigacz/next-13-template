@@ -30,6 +30,7 @@
 
     --destructive: 0 100% 50%;
     --destructive-foreground: 210 40% 98%;
+    --destructive-light: 0, 100%, 50%, 0.1;
 
     --ring: 215 20.2% 65.1%;
 

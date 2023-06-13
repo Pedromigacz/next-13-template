@@ -1,9 +1,10 @@
 import Link from 'next/link';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+
 import LoginButton from './LoginButton';
 import UserProfile from './UserProfile';
-// import LogoffButton from './LogoffButton';
+
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 
 export default async function Navbar() {
   const session = await getServerSession(authOptions);
