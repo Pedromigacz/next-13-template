@@ -21,7 +21,7 @@ export default async function Home() {
       <ul className='flex flex-col gap-2'>
         {posts &&
           posts.map((post) => (
-            <Post key={`post_${post.id}`} owner={post.user}>
+            <Post key={`post_${post.id}`} postId={post.id} owner={post.user}>
               {post.title}
             </Post>
           ))}

@@ -17,9 +17,10 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 interface PostProps {
   children: string | ReactNode;
   owner: User;
+  postId: number;
 }
 
-export default async function Post({ children, owner }: PostProps) {
+export default async function Post({ children, postId, owner }: PostProps) {
   const session = await getServerSession(authOptions);
 
   return (
@@ -38,7 +39,7 @@ export default async function Post({ children, owner }: PostProps) {
               <EditPostForm />
             </li>
             <li>
-              <DeletePostForm />
+              <DeletePostForm postId={postId} />
             </li>
           </ul>
         ) : null}
